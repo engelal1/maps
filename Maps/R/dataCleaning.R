@@ -217,6 +217,11 @@ head(mapData)
 
 write_csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
 
+##### 6/2/2020
+library(tidyverse)
+
+mapData <- read_csv("C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv", col_names = TRUE, na = "NA")
+
 as.factor(mapData$Type) -> mapData$Type
 
 levels(mapData$Type)
