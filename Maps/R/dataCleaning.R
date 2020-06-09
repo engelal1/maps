@@ -225,3 +225,63 @@ mapData <- read_csv("C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/d
 as.factor(mapData$Type) -> mapData$Type
 
 levels(mapData$Type)
+
+###### 6/9/2020
+
+mapData %>% 
+  mutate(Structure = case_when(Type == "Artifical Structures" ~ "FISH ATTRACTOR",
+                           Type == "PVC structures" ~ "FISH ATTRACTOR",
+                           Type == "BLDER" ~ "BOULDER",
+                           Type == "CEDAR" ~ "CEDAR",
+                           Type == "CRIB" ~ "CRIB",
+                           Type == "DEFLECT" ~ "DEFLECT",
+                           Type == "DLB WING" ~ "WING",
+                           Type == "GRAVEL" ~ "GRAVEL",
+                           Type == "ISLAND" ~ "ISLAND",
+                           Type == "ROOT WAD" ~ "ROOT WAD",
+                           Type == "LUNKER" ~ "LUNKER",
+                           Type == "ROCK PILE" ~ "ROCK PILE",
+                           Type == "VORTEX" ~ "VORTEX",
+                           Type == "WEIR" ~ "WEIR",
+                           Type == "WING" ~ "WING",
+                           Type == "Brush Pile" ~ "BRUSH PILE",
+                           Type == "Brush Piles" ~ "BRUSH PILE",
+                           Type == "Cedar Tree" ~ "CEDAR",
+                           Type == "edge of tree pile" ~ "BRUSH PILE",
+                           Type == "LOG CRIB" ~ "CRIB",
+                           Type == "GRAVEL" ~ "SHOAL",
+                           Type == "Gravel Shoals" ~ "SHOAL",
+                           Type == "Large Tree Pile" ~ "BRUSH PILE",
+                           Type == "Mossbacks & Trees" ~ "FISH ATTRACTOR",
+                           Type == "O'Dell Structures (reused)" ~ "FISH ATTRACTOR",
+                           Type == "PVC Structures" ~ "FISH ATTRACTOR",
+                           Type == "Rip Rap Piles" ~ "ROCK PILE",
+                           Type == "Mossbacks" ~ "FISH ATTRACTOR",
+                           Type == "Rock Shoal" ~ "SHOAL",
+                           Type == "Stump" ~ "TREE",
+                           Type == "STUMP" ~ "TREE",
+                           Type == "Trees" ~ "TREE",
+                           Type == "Unknown" ~ "STRUCTURE",
+                           Type == "UPRIGHT TREE" ~ "TREE",
+                           Type == "TREE" ~ "TREE",
+                           Type == "SHOAL" ~ "SHOAL",
+                           Type == "Rocks" ~ "ROCK PILE",
+                           Type == "ROOT WAD" ~ "ROOT WAD",
+                           TRUE ~ "STRUCTURE")) -> mapData
+
+as.factor(mapData$Type2) -> mapData$Type2
+
+levels(mapData$Type2)
+
+mapData %>% 
+  filter(Type != "MOTOR") %>% 
+  filter(Type != "BOAT RAMP") -> mapData
+
+mapData %>% 
+  mutate(Latitude = Lat,
+         Longitude = Lon) -> mapData
+
+select(mapData, -X1) -> mapData
+select(mapData, -Type2) -> mapData
+
+write.csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
