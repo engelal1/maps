@@ -284,4 +284,20 @@ mapData %>%
 select(mapData, -X1) -> mapData
 select(mapData, -Type2) -> mapData
 
+#Rewrite csv
+
+### #not in
+notIn = negate(`%in%`)
+
+
+mapData %>% 
+  filter(notIn(ID, c(4, 7, 364, 365, 366, 367, 
+                     368, 380, 381, 382, 383, 
+                     384, 385, 457, 597))) -> mapData
+
+mapData %>% 
+  filter(Location != "Long Pine Creek") -> mapData
+
+write_csv(mapData, "mapData.csv")
+
 write.csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
