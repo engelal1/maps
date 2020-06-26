@@ -301,3 +301,33 @@ mapData %>%
 write_csv(mapData, "mapData.csv")
 
 write.csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
+
+GlenCunningham <- read_csv("C:/Users/alex.engel/Documents/GitHub/maps/Maps/data/GlenCunninghamFinal.csv", col_names = T, na = "NA")
+
+
+str(GlenCunningham)
+
+GlenCunningham %>% 
+  rename(Code = `Waterbody Code`, 
+         Year = `Year Installed`,
+         Type = name) %>% 
+  select(Location, Code, Lat, Lon, Structure, Year, Type) %>% 
+  mutate(Latitude = Lat,
+         Longitude = Lon,
+         ID = 751:988) -> GlenCunningham
+
+GlenCunningham %>% 
+  filter(notIn(Structure, "OLD ROAD END")) -> GlenCunningham
+
+GlenCunningham %>% 
+  filter(notIn(Structure, "OLD BRIDGE")) -> GlenCunningham
+
+as.factor(GlenCunningham$Structure) -> GlenCunningham$Structure
+
+levels(GlenCunningham$Structure)
+
+rbind(mapData, GlenCunningham) -> mapData
+
+write.csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
+         
+write_csv(mapData, "mapData.csv")

@@ -51,7 +51,7 @@ allDataMap <- tm_shape(datasp)+
 
 allDataMap
 
-tmap_save(tm = allDataMap, filename = "StateAQHab.html")
+tmap_save(tm = allDataMap, filename = "StateAQHab2.html")
 
 
 #### Birdwood Map
@@ -576,12 +576,12 @@ write_csv(WillowIslandWMA, "WillowIslandWMA.csv")
 #Lake Glen Cunningham -> need to add the rest of the points (will do tonight!!!)
 
 mapData %>% 
-  filter(Location == "Cunningham Lake") %>% 
-  mutate(Structure = droplevels(Structure)) -> LakeCunningham
+  filter(Location == "Glen Cunningham") %>% 
+  mutate(Structure = droplevels(Structure)) -> GlenCunningham
 
-LakeCunninghamsp <- st_as_sf(LakeCunningham, coords = c("Lon", "Lat"), crs = 4326)
+GlenCunninghamsp <- st_as_sf(GlenCunningham, coords = c("Lon", "Lat"), crs = 4326)
 
-LakeCunninghamMap <- tm_shape(LakeCunninghamsp)+
+GlenCunninghamMap <- tm_shape(GlenCunninghamsp)+
   #Add basemap
   tm_basemap(server = c("OpenStreetMap.Mapnik")) +
   #add points to map with color changing by ID. 
@@ -596,6 +596,12 @@ LakeCunninghamMap <- tm_shape(LakeCunninghamsp)+
   tm_layout(legend.outside = TRUE) +
   tm_view(symbol.size.fixed = T)
 
-# 
-LakeCunninghamMap
+# Looks good
+GlenCunninghamMap
 
+GlenCunningham %>% 
+  select(ID, Lat, Lon, Structure) %>% 
+  rename(Latitude = Lat,
+         Longitude = Lon) -> LakeGlenCunningham
+
+write_csv(GlenCunningham, "LakeGlenCunningham.csv")
