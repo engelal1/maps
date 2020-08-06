@@ -1,0 +1,16 @@
+Metadata for Aquatic Habitat Structures ~ mapDataFinal
+
+Filename: mapDataFinal.csv 
+
+Objective: This data is location data for aquatic habitat structures in lakes throughout Nebraska. 
+Structures are described by 3 different columns (see below). 
+
+ID: Unique Identifying Number for each point
+Location: Which body of water the habitat structure is in
+Code: The unique waterbody code per lake, reservoir, or stream (see Game and Parks fisheries data for more detail)
+Lat: Latitude (in decimal degrees)
+Lon: Longitude (in decimal degrees)
+Type: How the biologist who took the point described the data (i.e. a brush pile or pvc structure)
+Year: Year the structure was put in the lake
+Structure: A more generalized habitat or structure type as defined by a Nebraska Aquatic Habitat Program Biologist (i.e. 
+Habitat: Categorizing structure or habitat into 4 different types: WOOD, ROCK, ISLAND, or STRUCTURE
