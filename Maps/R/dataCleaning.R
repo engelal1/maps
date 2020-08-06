@@ -331,3 +331,34 @@ rbind(mapData, GlenCunningham) -> mapData
 write.csv(mapData, "C:/Users/alex.engel/Documents/Coding/R_stuff/mapping/Maps/data/mapData.csv")
          
 write_csv(mapData, "mapData.csv")
+
+
+#Final Map Data Cleaning
+#8/6/2020
+#Redoing so that we will have 5 types of structures: Wood, Rock, Island, Fish Attractor, Structure
+
+library(tidyverse)
+
+mapData <- read_csv("C:/Users/alex.engel/Documents/GitHub/maps/mapData.csv", col_names = TRUE, na = "NA")
+
+as.factor(mapData$Structure) -> mapData$Structure
+levels(mapData$Structure)
+
+mapData %>% 
+  mutate(Habitat = case_when(Structure == "BRUSH PILE" ~ "WOOD",
+                               Type == "CEDAR" ~ "WOOD",
+                               Type == "CRIB" ~ "WOOD",
+                               Type == "FISH ATTRACTOR" ~ "STRUCTURE",
+                               Type == "GRAVEL" ~ "ROCK",
+                               Type == "ISLAND" ~ "ISLAND",
+                               Type == "ROCK PILE" ~ "ROCK",
+                               Type == "ROOT WAD" ~ "WOOD",
+                               Type == "SHOAL" ~ "ROCK",
+                               Type == "STRUCTURE" ~ "STRUCTURE",
+                               Type == "LUNKER" ~ "LUNKER",
+                               Type == "TREE" ~ "WOOD",
+                               TRUE ~ "STRUCTURE")) -> mapData2
+
+write.csv(mapData2, "C:/Users/alex.engel/Documents/GitHub/maps/mapDataFinal.csv")
+str(mapData2)
+
